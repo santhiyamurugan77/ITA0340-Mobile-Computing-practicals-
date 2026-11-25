@@ -1,0 +1,17 @@
+import psutil
+import matplotlib.pyplot as plt
+import time
+from IPython.display import clear_output, display
+
+upload = []
+download = []
+seconds = []
+
+old = psutil.net_io_counters()
+…    plt.grid(True)
+    plt.show()
+    
+    print("Download:", round(down, 3), "Mbps")
+    print("Upload:", round(up, 3), "Mbps")
+
+print("Monitoring Completed!")
