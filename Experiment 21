@@ -47,5 +47,4 @@ for i in range(60):
     print("Upload:", round(up, 3), "Mbps")
 
 print("Monitoring Completed!")
-## Output
-![Network Throughput Output](output.png)
+
