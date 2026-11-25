@@ -1,0 +1,48 @@
+
+import psutil
+import matplotlib.pyplot as plt
+import time
+from IPython.display import clear_output, display
+
+upload = []
+download = []
+seconds = []
+
+old = psutil.net_io_counters()
+start = time.time()
+
+print("Network Throughput Monitoring Started")
+
+# Monitor for 60 seconds
+for i in range(60):
+    time.sleep(1)
+
+    new = psutil.net_io_counters()
+    now = time.time()
+
+    up = (new.bytes_sent - old.bytes_sent) * 8 / 1000000
+    down = (new.bytes_recv - old.bytes_recv) * 8 / 1000000
+
+    upload.append(up)
+    download.append(down)
+    seconds.append(i + 1)
+
+    old = new
+
+    clear_output(wait=True)
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(seconds, download, label="Download Speed")
+    plt.plot(seconds, upload, label="Upload Speed")
+
+    plt.xlabel("Time (Seconds)")
+    plt.ylabel("Throughput (Mbps)")
+    plt.title("Live Network Throughput Monitoring")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+    print("Download:", round(down, 3), "Mbps")
+    print("Upload:", round(up, 3), "Mbps")
+
+print("Monitoring Completed!")
